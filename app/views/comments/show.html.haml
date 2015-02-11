@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @comment.user_id
+%p
+  %b Text:
+  = @comment.text
+%p
+  %b Points:
+  = @comment.points
+%p
+  %b Parent:
+  = @comment.parent_id
+%p
+  %b Story:
+  = @comment.story_id
+
+= link_to 'Edit', edit_comment_path(@comment)
+\|
+= link_to 'Back', comments_path
