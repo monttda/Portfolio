@@ -16,5 +16,13 @@
 !/log/.keep
 /tmp
 
-/database.yml
 /*.txt
+
+.bundle
+db/*.sqlite3
+log/*.log
+log/*
+tmp/**/*
+tmp/
+tmp/*
+config/database.yml

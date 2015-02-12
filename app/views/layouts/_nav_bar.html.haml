@@ -1,9 +1,20 @@
-%nav.navbar.navbar-inverse
-  = link_to t('general.news') ,stories_path()
-  = link_to t('general.comments') ,comments_path()
-  /= link_to t('general.submit'),
-  - if user_signed_in?
-    = link_to 'Logout', destroy_user_session_path()
-  - else user_signed_in?
-    = link_to t('general.login'),  user_session_path()
-    = link_to t('general.signin'), new_user_registration_path()
+%td
+  %table.main-bar
+    %tbody
+      %tr
+        %td.pagetop
+          = link_to t('general.portfolio'), root_path()
+          |
+          = link_to t('general.news') ,stories_path()
+          |
+          = link_to t('general.comments') ,comments_path()
+
+          /= link_to t('general.submit'),
+        - if user_signed_in?
+          %td.text-left
+            = link_to t('general.logout'), destroy_user_session_path()
+        - else
+          %td.text-left
+            = link_to t('general.login'),  user_session_path()
+            |
+            = link_to t('general.signin'), new_user_registration_path()

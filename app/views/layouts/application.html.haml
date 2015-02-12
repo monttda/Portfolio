@@ -4,7 +4,8 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     = csrf_meta_tags
-    = "Portfolio"
+    = stylesheet_link_tag 'application', media: "all"
+    = yield(:page_stylesheet) if content_for?(:page_stylesheet)
     = render 'layouts/nav_bar'
 %p.notice= notice
 %p.alert= alert
