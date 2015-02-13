@@ -38,7 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Use Postgrest adapter
-gem 'pg', '~> 0.18.1'
+gem 'pg', '~> 0.18.0'
 
 gem 'therubyracer', '0.12.1'
 
@@ -47,7 +47,7 @@ gem 'will_paginate', '~> 3.0.6'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem 'awesome_print'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
