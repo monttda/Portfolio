@@ -1,20 +1,37 @@
-%td
+%td.padding
   %table.main-bar
     %tbody
       %tr
         %td.pagetop
-          = link_to t('general.portfolio'), root_path()
+          %b= link_to t('general.portfolio'), root_path()
           |
-          = link_to t('general.news') ,stories_path()
+          %b= link_to t('general.news') ,stories_path()
           |
-          = link_to t('general.comments') ,comments_path()
+          %b= link_to t('general.comments') ,comments_path()
 
           /= link_to t('general.submit'),
         - if user_signed_in?
-          %td.text-left
-            = link_to t('general.logout'), destroy_user_session_path()
+          %td.text-right
+            %b= link_to t('general.logout'), destroy_user_session_path()
         - else
-          %td.text-left
-            = link_to t('general.login'),  user_session_path()
+          %td.text-right
+            %b= link_to t('general.login'),  user_session_path()
             |
-            = link_to t('general.signin'), new_user_registration_path()
+            %b= link_to t('general.signin'), new_user_registration_path()
+#notices
+  -if notice.present?
+    %div{ class: "alert alert-style alert-notice" }
+      %p.notice= notice
+      %div{ class: "arrow-box-notice" }
+  -if alert.present?
+    %div{ class: "alert alert-style alert-danger" }
+      %p.alert= alert
+      %div{ class: "arrow-box-danger" }
+
+- content_for :page_javascript do
+
+  :coffeescript
+
+    $(document).ready ->
+      notices = $('#notices')
+      notices.fadeOut(5000)

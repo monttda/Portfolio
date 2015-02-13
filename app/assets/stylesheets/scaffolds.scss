@@ -4,6 +4,10 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  margin-top: 10px;
+  margin-right: 150px;
+  margin-bottom: 20px;
+  margin-left: 150px;
 }
 
 p, ol, ul, td {
@@ -20,13 +24,6 @@ pre {
 
 a {
   color: #000;
-  &:visited {
-    color: #666;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
 }
 
 div {
@@ -35,7 +32,7 @@ div {
   }
 }
 
-#notice {
+.notice {
   color: green;
 }
 
@@ -66,4 +63,14 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.main-bar{
+  background-color: #09ff00;
+
+
+}
+
+.main-bar-content{
+  background-color: #95a399;
 }

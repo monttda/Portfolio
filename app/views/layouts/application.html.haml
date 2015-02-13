@@ -7,10 +7,11 @@
     = stylesheet_link_tag 'application', media: "all"
     = yield(:page_stylesheet) if content_for?(:page_stylesheet)
     = render 'layouts/nav_bar'
-%p.notice= notice
-%p.alert= alert
 
-= yield
 
-</body>
-</html>
+
+=yield
+
+=javascript_include_tag 'application'
+
+=yield(:page_javascript) if content_for?(:page_javascript)
