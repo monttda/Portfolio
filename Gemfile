@@ -58,9 +58,14 @@ group :development, :test do
   gem 'yard', '0.8.7.6'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
 
 group :test do
   gem 'rspec-rails', '3.0.1'
   gem 'database_cleaner', '1.3.0'
   gem 'factory_girl_rails', '4.4.1'
 end
+
+ruby '2.0.0'
