@@ -1,10 +1,13 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
-
+  @@per_page = 5
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.all
+    @stories = Story.order(:updated_at)
+    page = params[:page] ? params[:page].to_i : 1
+    @stories = @stories.paginate(page: page,
+                                 per_page: @@per_page)
   end
 
   # GET /stories/1

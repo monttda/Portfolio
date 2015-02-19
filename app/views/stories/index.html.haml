@@ -1,28 +1,21 @@
-%h1 Listing stories
-
-%table
-  %thead
-    %tr
-      %th Title
-      %th User
-      %th Text
-      %th Url
-      %th Points
-      %th
-      %th
-      %th
-
-  %tbody
-    - @stories.each do |story|
-      %tr
-        %td= story.title
-        %td= story.user_id
-        %td= story.text
-        %td= story.url
-        %td= story.points
-        %td= link_to 'Show', story
-        %td= link_to 'Edit', edit_story_path(story)
-        %td= link_to 'Destroy', story, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%td
+  %table.main-bar-content
+    %thead
+    %tbody
+      - @stories.each do |story|
+        %tr
+          %td
+            %div.main-text.no-underline
+              -if story.url.present?
+                = link_to story.title, story.url
+              -else
+                = story.title
+            %div.sub-text.text-left
+              = "#{story.points} #{t('general.points_by')} #{story.user.email} "
+              = link_to 'Show', story
+              = link_to 'Edit', edit_story_path(story)
+              = link_to 'Destroy', story, :method => :delete, :data => { :confirm => 'Are you sure?' }
+= will_paginate @stories
 
 %br
 

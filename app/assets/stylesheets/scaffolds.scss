@@ -23,7 +23,7 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #000000;
 }
 
 div {
@@ -72,6 +72,19 @@ div {
 }
 
 .main-bar-content{
-  background-color: #95a399;
+  background-color: #d4d4d4;
   width: 100%;
+}
+.main-text{
+  font-size: 14px;
+  color: #000000;
+}
+.sub-text a:link{
+  font-size: 10px;
+  color: #585858;
+}
+
+.no-underline a:hover{
+    text-decoration: none;
+    color: #000000;
 }
