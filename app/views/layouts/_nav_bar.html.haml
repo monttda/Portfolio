@@ -8,8 +8,8 @@
           %b= link_to t('general.news') ,stories_path()
           |
           %b= link_to t('general.comments') ,comments_path()
-
-          /= link_to t('general.submit'),
+          |
+          %b= link_to t('general.submit'), new_story_path
         - if user_signed_in?
           %td.text-right
             %b= link_to t('general.logout'), destroy_user_session_path()

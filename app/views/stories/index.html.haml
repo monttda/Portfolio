@@ -15,8 +15,7 @@
               = link_to 'Show', story
               = link_to 'Edit', edit_story_path(story)
               = link_to 'Destroy', story, :method => :delete, :data => { :confirm => 'Are you sure?' }
-= will_paginate @stories
 
-%br
-
-= link_to 'New Story', new_story_path
+      %tr
+        %td
+          = will_paginate @stories, page_links: false
