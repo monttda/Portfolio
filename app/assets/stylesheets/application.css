@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require_tree .
- *= require_self
+ *= requireot_self
  *= bootstrap_and_overrides
+ *= require bootstrap-social
+ *= require font-awesome
  */
