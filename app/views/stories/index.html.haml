@@ -5,12 +5,13 @@
       - @stories.each do |story|
         %tr
           %td
+            %div.glyphicon.glyphicon-triangle-top.inline-arrow
             %div.main-text.no-underline
               -if story.url.present?
                 = link_to story.title, story.url
               -else
                 = story.title
-            %div.sub-text.text-left
+            %div.sub-text.text-left.hoffset3
               = "#{story.points} #{t('general.points_by')} #{story.user.email} "
               = link_to 'Show', story
               = link_to 'Edit', edit_story_path(story)

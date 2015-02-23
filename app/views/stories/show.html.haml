@@ -1,21 +1,30 @@
-%p#notice= notice
-
-%p
-  %b Title:
-  = @story.title
-%p
-  %b User:
-  = @story.user_id
-%p
-  %b Text:
-  = @story.text
-%p
-  %b Url:
-  = @story.url
-%p
-  %b Points:
-  = @story.points
-
+%td.hoffset5
+  %table.main-bar-content
+    %thead
+    %tbody
+      %tr
+        %td.col-xs-12
+          %div.glyphicon.glyphicon-triangle-top.inline-arrow
+          %div.main-text.no-underline
+            -if @story.url.present?
+              = link_to @story.title, @story.url
+            -else
+              = @story.title
+          %div.sub-text.text-left.hoffset3
+            = "#{@story.points} #{t('general.points_by')} #{@story.user.email} "
+            = link_to 'Show', @story
+            -if current_user.id == @story.user_id
+              = link_to 'Edit', edit_story_path(@story)
+              = link_to 'Destroy', @story, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          .voffset4.main-bar-content
+            .row-fluid.span1
+              =form_for @comment do |f|
+                =f.hidden_field :story_id ,value: @story.id
+                =f.hidden_field :user_id, value: current_user.id
+                =f.text_area :text, size: "49x4"
+                .voffset2
+                  =f.submit "Add comment"
+            =render 'comments/comments_list', comments: @comments
 = link_to 'Edit', edit_story_path(@story)
 \|
 = link_to 'Back', stories_path
