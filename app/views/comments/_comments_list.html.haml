@@ -1,0 +1,14 @@
+-#
+  Renders a dropdown with the school years aviable for this school
+
+  @param [String] @url: base ur for each diffenre engagement
+-comments.each do |comment|
+  %div.glyphicon.glyphicon-triangle-top.inline-arrow
+  %div.sub-text.text-left
+    = "#{comment.points} #{t('general.points_by')} #{comment.user.try(:email)} "
+  %div.main-text.no-underline.voffset.hoffset3
+    = comment.text
+
+  -if @comments_hash["#{comment.id}"].present?
+    .row-fluid.hoffset4
+      =render 'comments/comments_list', comments: @comments_hash["#{comment.id}"]
