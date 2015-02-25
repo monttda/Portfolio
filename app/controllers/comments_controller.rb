@@ -8,8 +8,19 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/1
-  # GET /comments/1.json
+  #
+  # @return [Hash<Symbol,ActiveRecord_Associations_CollectionProxy>]
+  #  comments_hash: a Hash containing the comments whose parents are the comments
+  #  associated to the @comment
+  # @return [Comment] @new_comment: new intance of a Comment
+  # @return [Comment] @comment: the Comment to be shown
+  # @return [ActiveRecord_Associations_CollectionProxy] @comments: all the
+  #   comments associated to @comment
+  #
   def show
+    @comments = @comment.comments
+    @comments_hash = @comment.get_comments
+    @new_comment = Comment.new
   end
 
   # GET /comments/new

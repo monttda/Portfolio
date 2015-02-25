@@ -11,7 +11,15 @@ class StoriesController < ApplicationController
   end
 
   # GET /stories/1
-  # GET /stories/1.json
+  #
+  # @return [Hash<Symbol,ActiveRecord_Associations_CollectionProxy>]
+  #  comments_hash: a Hash containing the comments whose parents are the comments
+  #  associated to the @story
+  # @return [Comment] @comment: new intance of a Comment
+  # @return [Story] @story: the Story to be shown
+  # @return [ActiveRecord_Associations_CollectionProxy] @comments: all the
+  #   comments associated to @story
+  #
   def show
     @comments = @story.comments
     @comments_hash = @story.get_comments

@@ -1,21 +1,24 @@
-%p#notice= notice
-
-%p
-  %b User:
-  = @comment.user_id
-%p
-  %b Text:
-  = @comment.text
-%p
-  %b Points:
-  = @comment.points
-%p
-  %b Parent:
-  = @comment.parent_id
-%p
-  %b Story:
-  = @comment.story_id
-
-= link_to 'Edit', edit_comment_path(@comment)
-\|
-= link_to 'Back', comments_path
+%td.hoffset5
+  %table.main-bar-content
+    %thead
+    %tbody
+      %tr
+        %td.col-xs-12
+          %div.glyphicon.glyphicon-triangle-top.inline-arrow
+          %div.sub-text.text-left
+            = "#{@comment.points} #{t('general.points_by')} #{@comment.user.email} "
+            = link_to 'Show', @comment
+            -if current_user.id == @comment.user_id
+              = link_to 'Edit', edit_comment_path(@comment)
+              = link_to 'Destroy', @comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %div.main-text.no-underline.hoffset3
+            = @comment.text
+          .voffset4.main-bar-content
+            .row-fluid.span1
+              =form_for @new_comment do |f|
+                =f.hidden_field :parent_id ,value: @comment.id
+                =f.hidden_field :user_id, value: current_user.id
+                =f.text_area :text, size: "49x4"
+                .voffset2
+                  =f.submit "Add comment"
+            =render 'comments/comments_list', comments: @comments
