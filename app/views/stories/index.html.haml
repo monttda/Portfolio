@@ -14,8 +14,9 @@
             %div.sub-text.text-left.hoffset3
               = "#{story.points} #{t('general.points_by')} #{story.user.email} "
               = link_to 'Show', story
-              = link_to 'Edit', edit_story_path(story)
-              = link_to 'Destroy', story, :method => :delete, :data => { :confirm => 'Are you sure?' }
+              -if current_user.id == story.user_id  
+                = link_to 'Edit', edit_story_path(story)
+                = link_to 'Destroy', story, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
       %tr
         %td

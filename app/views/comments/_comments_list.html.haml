@@ -7,6 +7,7 @@
   %div.glyphicon.glyphicon-triangle-top.inline-arrow
   %div.sub-text.text-left
     = "#{comment.points} #{t('general.points_by')} #{comment.user.try(:email)} "
+    = link_to 'Show', comment
   %div.main-text.no-underline.voffset.hoffset3
     = comment.text
 

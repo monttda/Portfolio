@@ -1,29 +1,20 @@
-%h1 Listing comments
+%td
+  %table.main-bar-content
+    %thead
+    %tbody
+      - @comments.each do |comment|
+        %tr
+          %td
+            %div.glyphicon.glyphicon-triangle-top.inline-arrow
+            %div.main-text.no-underline
+              = comment.text
+            %div.sub-text.text-left.hoffset3
+              = "#{comment.points} #{t('general.points_by')} #{comment.user.email} "
+              = link_to 'Show', comment
+              -if current_user.id == comment.user_id
+                = link_to 'Edit', edit_comment_path(comment)
+                = link_to 'Destroy', comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%table
-  %thead
-    %tr
-      %th User
-      %th Text
-      %th Points
-      %th Parent
-      %th Story
-      %th
-      %th
-      %th
-      
-  %tbody
-    - @comments.each do |comment|
       %tr
-        %td= comment.user_id
-        %td= comment.text
-        %td= comment.points
-        %td= comment.parent_id
-        %td= comment.story_id
-        %td= link_to 'Show', comment
-        %td= link_to 'Edit', edit_comment_path(comment)
-        %td= link_to 'Destroy', comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Comment', new_comment_path
+        %td
+          = will_paginate @comment, page_links: false

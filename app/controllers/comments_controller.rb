@@ -1,10 +1,13 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  @@per_page = 5
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @comments = Comment.order(:updated_at)
+    page = params[:page] ? params[:page].to_i : 1
+    @comments = @comments.paginate(page: page,
+                                 per_page: @@per_page)
   end
 
   # GET /comments/1
@@ -35,7 +38,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = Comment.new(comment_params.merge({points: 0}))
 
     respond_to do |format|
       if @comment.save
@@ -80,6 +83,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:user_id, :text, :points, :parent_id, :story_id)
+      params.require(:comment).permit(:user_id, :text, :parent_id, :story_id)
     end
 end
