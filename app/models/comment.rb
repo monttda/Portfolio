@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
   belongs_to :parent, class_name: "Comment"
   has_many :comments, foreign_key: "parent_id"
   validates :user, presence: true
+  validates :text, presence: true
 
 =begin
     Returns all the comments related to the Comment

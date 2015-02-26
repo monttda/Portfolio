@@ -31,19 +31,21 @@ class CommentsController < ApplicationController
   end
 
   # POST /comments
-  # POST /comments.json
+  # return [Comment] @comment: the comment instance that was tried to save
+  #
   def create
     @comment = Comment.new(comment_params.merge({points: 0}))
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+    if @comment.save
+      flash[:notice] = 'Comment was successfully created.'
+    else
+      flash[:alert] = ""
+      @comment.errors.full_messages.each do |message|
+        flash[:alert] += "#{message} \n"
       end
+
     end
+
+    redirect_to :back
   end
 
   # PATCH/PUT /comments/1
