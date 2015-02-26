@@ -26,11 +26,6 @@ class CommentsController < ApplicationController
     @new_comment = Comment.new
   end
 
-  # GET /comments/new
-  def new
-    @comment = Comment.new
-  end
-
   # GET /comments/1/edit
   def edit
   end

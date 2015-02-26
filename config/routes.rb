@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get "/logout" => "devise/sessions#destroy"
     get "/login" => "devise/sessions#new"
   end
-  resources :comments do
+  resources :comments, only: [:show,:edit, :create,:index,:destroy, :update] do
   end
 
   resources :stories do
