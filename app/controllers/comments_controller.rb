@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.order(:updated_at)
+    @comments = Comment.order(updated_at: :desc)
     page = params[:page] ? params[:page].to_i : 1
     @comments = @comments.paginate(page: page,
                                  per_page: @@per_page)

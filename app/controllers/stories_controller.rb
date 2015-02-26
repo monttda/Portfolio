@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.order(:updated_at)
+    @stories = Story.order(updated_at: :desc)
     page = params[:page] ? params[:page].to_i : 1
     @stories = @stories.paginate(page: page,
                                  per_page: @@per_page)
@@ -38,7 +38,7 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
-    @story = Story.new(story_params)
+    @story = Story.new(story_params.merge({points: 0}))
 
     respond_to do |format|
       if @story.save
@@ -83,6 +83,6 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :user_id, :text, :url, :points)
+      params.require(:story).permit(:title, :user_id, :text, :url)
     end
 end

@@ -22,10 +22,20 @@
 en:
   general:
     comments: 'Comments'
+    destroy: 'Destroy'
+    edit: 'Edit'
     login: 'Login'
     logout: 'Logout'
     news: 'News'
+    or: "or"
+    points_by: 'points by'
     portfolio: 'Portfolio'
+    show: 'Show'
     signin: 'Signin'
     submit: 'Submit'
-    points_by: 'points by'
+  story:
+    errors:
+      url_text: 'The story should have url or text but not both'
+    text: 'Text'
+    title: 'Title'
+    url: 'URL'
