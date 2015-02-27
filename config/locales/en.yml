@@ -41,6 +41,7 @@ en:
   story:
     errors:
       url_text: 'The story should have url or text but not both'
+      wrong_url_format: 'The url given is not correct it should begin with https:// or http://'
     text: 'Text'
     title: 'Title'
     url: 'URL'
