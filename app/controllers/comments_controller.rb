@@ -4,10 +4,11 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.order(updated_at: :desc)
+    @comments = Comment.order(created_at: :desc)
     page = params[:page] ? params[:page].to_i : 1
     @comments = @comments.paginate(page: page,
                                  per_page: @@per_page)
+    @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
   end
 
   # GET /comments/1
@@ -24,6 +25,9 @@ class CommentsController < ApplicationController
     @comments = @comment.comments
     @comments_hash = @comment.get_comments
     @new_comment = Comment.new
+    @liked = current_user.comment_likes
+                         .find_by(comment: @comment) ? true : false
+    @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
   end
 
   # GET /comments/1/edit

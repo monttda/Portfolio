@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :stories, dependent: :destroy
   has_many :comments, dependent: :destroy
-
+  has_many :comment_likes
+  has_many :story_likes
 
 
   def self.from_omniauth(auth)

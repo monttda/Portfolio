@@ -5,15 +5,18 @@
       - @stories.each do |story|
         %tr
           %td
-            =button_to "/story_likes/?story_id=#{story.id}&user_id=#{story.user_id}",
-                      method: :create,
-                      class: ['button-as-no-button',],
-                      form_class: ['inline-arrow'],
-                      id: "story_#{story.id}",
-                      title: "CHuchas",
-                      remote: true do
-              %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
-            %div.main-text.no-underline.near_like
+            -unless @liked_stories.include?(story.id)
+              =button_to "/story_likes/?story_id=#{story.id}&user_id=#{story.user_id}",
+                        method: :create,
+                        class: ['button-as-no-button'],
+                        form_class: ['inline-arrow'],
+                        id: "story_#{story.id}",
+                        remote: true do
+                %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
+              -offset_class = ''
+            -else
+              -offset_class = 'hoffset3'
+            %div.main-text.no-underline.near_like{class: "#{offset_class}"}
               -if story.url.present?
                 = link_to story.title, url_for(story.url)
               -else

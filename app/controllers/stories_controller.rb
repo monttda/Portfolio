@@ -4,10 +4,11 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.order(updated_at: :desc)
+    @stories = Story.order(created_at: :desc)
     page = params[:page] ? params[:page].to_i : 1
     @stories = @stories.paginate(page: page,
                                  per_page: @@per_page)
+    @liked_stories = Set.new(current_user.story_likes.pluck(:story_id))
   end
 
   # GET /stories/1
@@ -24,6 +25,9 @@ class StoriesController < ApplicationController
     @comments = @story.comments
     @comments_hash = @story.get_comments
     @comment = Comment.new
+    @liked = current_user.story_likes
+                         .find_by(story_id: @story.id) ? true : false
+    @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
   end
 
   # GET /stories/new

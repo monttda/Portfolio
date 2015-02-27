@@ -4,8 +4,18 @@
   @param [Array<Comment>] comments: the comments to be shown in the view and
                           their children
 -comments.each do |comment|
-  %div.glyphicon.glyphicon-triangle-top.inline-arrow
-  %div.sub-text.text-left
+  -unless @liked_comments.include?(comment.id)
+    =button_to "/comment_likes/?comment_id=#{comment.id}&user_id=#{comment.user_id}",
+              method: :create,
+              class: ['button-as-no-button',],
+              form_class: ['inline-arrow'],
+              id: "comment_#{comment.id}",
+              remote: true do
+      %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
+    -offset_class = ''
+  -else
+    -offset_class = 'hoffset3'
+  %div.sub-text.text-left{class: "#{offset_class}"}
     = "#{comment.points} #{t('general.points_by')} #{comment.user.try(:email)} "
     = link_to 'Show', comment
   %div.main-text.no-underline.voffset.hoffset3
