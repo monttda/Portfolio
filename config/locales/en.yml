@@ -21,8 +21,11 @@
 
 en:
   comment:
+    add: 'Add comment'
     update: 'Update comment'
   general:
+    ago: 'ago'
+    confirm: 'Are you sure?'
     comments: 'Comments'
     destroy: 'Destroy'
     edit: 'Edit'

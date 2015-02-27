@@ -6,11 +6,14 @@
         %td.col-xs-12
           %div.glyphicon.glyphicon-triangle-top.inline-arrow
           %div.sub-text.text-left
-            = "#{@comment.points} #{t('general.points_by')} #{@comment.user.email} "
-            = link_to 'Show', @comment
+            = "#{@comment.points} #{t('general.points_by')} #{@comment.user.email}| #{time_ago_in_words(comment.created_at)} #{t('general.ago')} "
+            |
+            = link_to t('general.show'), @comment
             -if current_user.id == @comment.user_id
-              = link_to 'Edit', edit_comment_path(@comment)
-              = link_to 'Destroy', @comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+              |
+              = link_to t('general.edit'), edit_comment_path(@comment)
+              |
+              = link_to t('general.destroy'), @comment, :method => :delete, :data => { :confirm => t('general.confirm') }
           %div.main-text.no-underline.hoffset3
             = @comment.text
           .voffset4.main-bar-content
@@ -20,5 +23,5 @@
                 =f.hidden_field :user_id, value: current_user.id
                 =f.text_area :text, size: "49x4"
                 .voffset2
-                  =f.submit "Add comment"
+                  =f.submit t('comment.add')
             =render 'comments/comments_list', comments: @comments
