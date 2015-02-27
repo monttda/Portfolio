@@ -3,6 +3,8 @@ class CommentsController < ApplicationController
   @@per_page = 5
   # GET /comments
   # GET /comments.json
+  # @return [Set<Integer>] @liked_comments: the liked comments but the current
+  #   
   def index
     @comments = Comment.order(created_at: :desc)
     page = params[:page] ? params[:page].to_i : 1
@@ -20,7 +22,9 @@ class CommentsController < ApplicationController
   # @return [Comment] @comment: the Comment to be shown
   # @return [ActiveRecord_Associations_CollectionProxy] @comments: all the
   #   comments associated to @comment
-  #
+  # @return [Boolean] @liked: if @comment has already been liked
+  # @return [Set<Integer>] @liked_comments: the liked comments but the current
+  #          user
   def show
     @comments = @comment.comments
     @comments_hash = @comment.get_comments

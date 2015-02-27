@@ -3,6 +3,8 @@ class StoriesController < ApplicationController
   @@per_page = 5
   # GET /stories
   # GET /stories.json
+  # @return [Set<Integer>] @liked_stories: the liked stories but the current
+  #
   def index
     @stories = Story.order(created_at: :desc)
     page = params[:page] ? params[:page].to_i : 1
@@ -20,7 +22,9 @@ class StoriesController < ApplicationController
   # @return [Story] @story: the Story to be shown
   # @return [ActiveRecord_Associations_CollectionProxy] @comments: all the
   #   comments associated to @story
-  #
+  # @return [Boolean] @liked: if @story has already been liked
+  # @return [Set<Integer>] @liked_comments: the liked comments but the current
+  #          user
   def show
     @comments = @story.comments
     @comments_hash = @story.get_comments
