@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   resources :comments, only: [:show,:edit, :create,:index,:destroy, :update] do
   end
 
+  resources :comment_likes, only: [:create] do
+  end
+
   resources :stories do
+  end
+
+  resources :story_likes, only: [:create] do
   end
 end

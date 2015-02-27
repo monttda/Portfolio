@@ -118,5 +118,13 @@ div {
 
 
 .inline-arrow{
-  float:left;
+  float:left!important;
+}
+
+.button-as-no-button {
+  background:none!important;
+  border:none;
+  padding:0!important;
+  color: #000000;
+  cursor:pointer;
 }

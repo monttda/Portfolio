@@ -4,9 +4,16 @@
     %tbody
       %tr
         %td.col-xs-12
-          %div.glyphicon.glyphicon-triangle-top.inline-arrow
-          %div.sub-text.text-left
-            = "#{@comment.points} #{t('general.points_by')} #{@comment.user.email}| #{time_ago_in_words(comment.created_at)} #{t('general.ago')} "
+          =button_to "/comment_likes/?comment_id=#{@comment.id}&user_id=#{@comment.user_id}",
+                    method: :create,
+                    class: ['button-as-no-button',],
+                    form_class: ['inline-arrow'],
+                    id: "comment_#{@comment.id}",
+                    title: "CHuchas",
+                    remote: true do
+            %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
+          %div.sub-text.text-left.near_like
+            = "#{@comment.points} #{t('general.points_by')} #{@comment.user.email}| #{time_ago_in_words(@comment.created_at)} #{t('general.ago')} "
             |
             = link_to t('general.show'), @comment
             -if current_user.id == @comment.user_id

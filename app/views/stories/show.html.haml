@@ -4,14 +4,21 @@
     %tbody
       %tr
         %td.col-xs-12
-          %div.glyphicon.glyphicon-triangle-top.inline-arrow
-          %div.main-text.no-underline
+          =button_to "/story_likes/?story_id=#{@story.id}&user_id=#{@story.user_id}",
+                    method: :create,
+                    class: ['button-as-no-button',],
+                    form_class: ['inline-arrow'],
+                    id: "story_#{@story.id}",
+                    title: "CHuchas",
+                    remote: true do
+            %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
+          %div.main-text.no-underline.near_like
             -if @story.url.present?
               = link_to @story.title, @story.url
             -else
               = @story.title
           %div.sub-text.text-left.hoffset3
-            = "#{@story.points} #{t('general.points_by')} #{@story.user.email}| #{time_ago_in_words(story.created_at)} #{t('general.ago')}"
+            = "#{@story.points} #{t('general.points_by')} #{@story.user.email}| #{time_ago_in_words(@story.created_at)} #{t('general.ago')}"
             |
             = link_to t('general.show'), @story
             -if current_user.id == @story.user_id
