@@ -2,7 +2,8 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
   @@per_page = 5
   # GET /stories
-  # GET /stories.json
+  # @return [Story::ActiveRecord_Relation] @stories: the stories to be shown in
+  #         ordered and paginated
   # @return [Set<Integer>] @liked_stories: the liked stories but the current
   #
   def index
@@ -20,7 +21,7 @@ class StoriesController < ApplicationController
   #  associated to the @story
   # @return [Comment] @comment: new intance of a Comment
   # @return [Story] @story: the Story to be shown
-  # @return [ActiveRecord_Associations_CollectionProxy] @comments: all the
+  # @return [Comment::ActiveRecord_Associations_CollectionProxy] @comments: all the
   #   comments associated to @story
   # @return [Boolean] @liked: if @story has already been liked
   # @return [Set<Integer>] @liked_comments: the liked comments but the current
@@ -51,10 +52,8 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.save
         format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render :show, status: :created, location: @story }
       else
         format.html { render :new }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,10 +64,8 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.update(story_params)
         format.html { redirect_to @story, notice: 'Story was successfully updated.' }
-        format.json { render :show, status: :ok, location: @story }
       else
         format.html { render :edit }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,7 +76,6 @@ class StoriesController < ApplicationController
     @story.destroy
     respond_to do |format|
       format.html { redirect_to stories_url, notice: 'Story was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

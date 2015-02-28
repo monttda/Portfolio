@@ -2,9 +2,10 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   @@per_page = 5
   # GET /comments
-  # GET /comments.json
+  # @return [Comment::ActiveRecord_Relation] @comments: the comments to be shown
+  #          in ordered and paginated
   # @return [Set<Integer>] @liked_comments: the liked comments but the current
-  #   
+  #
   def index
     @comments = Comment.order(created_at: :desc)
     page = params[:page] ? params[:page].to_i : 1
@@ -13,7 +14,7 @@ class CommentsController < ApplicationController
     @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
   end
 
-  # GET /comments/1
+  # GET /comments/:id
   #
   # @return [Hash<Symbol,ActiveRecord_Associations_CollectionProxy>]
   #  comments_hash: a Hash containing the comments whose parents are the comments
@@ -34,7 +35,7 @@ class CommentsController < ApplicationController
     @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
   end
 
-  # GET /comments/1/edit
+  # GET /comments/:id/edit
   def edit
   end
 
@@ -62,21 +63,17 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /comments/1
-  # DELETE /comments/1.json
   def destroy
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

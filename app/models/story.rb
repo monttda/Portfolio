@@ -34,8 +34,10 @@ class Story < ActiveRecord::Base
     end
 
     def url_has_correct_format
-      unless self.url.downcase.start_with?('https://', 'http://')
-        errors.add(:url, I18n.t('story.errors.wrong_url_format'))
+      if self.url.present?
+        unless self.url.downcase.start_with?('https://', 'http://')
+          errors.add(:url, I18n.t('story.errors.wrong_url_format'))
+        end
       end
     end
 end
