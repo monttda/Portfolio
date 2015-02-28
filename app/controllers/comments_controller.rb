@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :create]
   @@per_page = 5
   # GET /comments
   # @return [Comment::ActiveRecord_Relation] @comments: the comments to be shown
@@ -11,7 +12,11 @@ class CommentsController < ApplicationController
     page = params[:page] ? params[:page].to_i : 1
     @comments = @comments.paginate(page: page,
                                  per_page: @@per_page)
-    @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
+    if user_signed_in?
+      @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
+    else
+      @liked_comments = Set.new
+    end
   end
 
   # GET /comments/:id
@@ -30,9 +35,14 @@ class CommentsController < ApplicationController
     @comments = @comment.comments
     @comments_hash = @comment.get_comments
     @new_comment = Comment.new
-    @liked = current_user.comment_likes
-                         .find_by(comment: @comment) ? true : false
-    @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
+    if user_signed_in?
+      @liked = current_user.comment_likes
+                           .find_by(comment: @comment) ? true : false
+      @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
+    else
+      @liked = false
+      @liked_comments = Set.new
+    end
   end
 
   # GET /comments/:id/edit

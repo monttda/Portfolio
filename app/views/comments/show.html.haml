@@ -4,7 +4,7 @@
     %tbody
       %tr
         %td.col-xs-12
-          -unless @liked
+          -unless !user_signed_in? || @liked
             =button_to "/comment_likes/?comment_id=#{@comment.id}&user_id=#{@comment.user_id}",
                       method: :create,
                       class: ['button-as-no-button',],
@@ -19,7 +19,7 @@
             = "#{@comment.points} #{t('general.points_by')} #{@comment.user.email}| #{time_ago_in_words(@comment.created_at)} #{t('general.ago')} "
             |
             = link_to t('general.show'), @comment
-            -if current_user.id == @comment.user_id
+            -if user_signed_in? && current_user.id == @comment.user_id
               |
               = link_to t('general.edit'), edit_comment_path(@comment)
               |
@@ -30,7 +30,7 @@
             .row-fluid.hoffset3
               =form_for @new_comment do |f|
                 =f.hidden_field :parent_id ,value: @comment.id
-                =f.hidden_field :user_id, value: current_user.id
+                =f.hidden_field :user_id, value: current_user.try(:id)
                 =f.text_area :text, size: "49x4"
                 .voffset2
                   =f.submit t('comment.add')

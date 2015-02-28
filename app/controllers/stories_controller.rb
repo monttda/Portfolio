@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :create, :new]
   @@per_page = 5
   # GET /stories
   # @return [Story::ActiveRecord_Relation] @stories: the stories to be shown in
@@ -11,7 +12,11 @@ class StoriesController < ApplicationController
     page = params[:page] ? params[:page].to_i : 1
     @stories = @stories.paginate(page: page,
                                  per_page: @@per_page)
-    @liked_stories = Set.new(current_user.story_likes.pluck(:story_id))
+    if user_signed_in?
+      @liked_stories = Set.new(current_user.story_likes.pluck(:story_id))
+    else
+      @liked_stories = Set.new
+    end
   end
 
   # GET /stories/:id
@@ -30,9 +35,14 @@ class StoriesController < ApplicationController
     @comments = @story.comments
     @comments_hash = @story.get_comments
     @comment = Comment.new
-    @liked = current_user.story_likes
-                         .find_by(story_id: @story.id) ? true : false
-    @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
+    if user_signed_in?
+      @liked = current_user.comment_likes
+                           .find_by(comment: @comment) ? true : false
+      @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
+    else
+      @liked = false
+      @liked_comments = Set.new
+    end
   end
 
   # GET /stories/new

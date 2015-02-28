@@ -4,7 +4,7 @@
   @param [Array<Comment>] comments: the comments to be shown in the view and
                           their children
 -comments.each do |comment|
-  -unless @liked_comments.include?(comment.id)
+  -unless !user_signed_in? || @liked_comments.include?(comment.id)
     =button_to "/comment_likes/?comment_id=#{comment.id}&user_id=#{comment.user_id}",
               method: :create,
               class: ['button-as-no-button',],
