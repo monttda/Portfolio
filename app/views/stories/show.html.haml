@@ -30,8 +30,11 @@
               = link_to t('general.edit'), edit_story_path(@story)
               |
               = link_to t('general.delete'), @story, :method => :delete, :data => { :confirm => t('general.confirm') }
+          %div.sub-text.text-left.hoffset3
+            -if @story.text.present?
+              = @story.text
           .voffset4.main-bar-content
-            .row-fluid.span1
+            .row-fluid.hoffset3
               =form_for @comment do |f|
                 =f.hidden_field :story_id ,value: @story.id
                 =f.hidden_field :user_id, value: current_user.id

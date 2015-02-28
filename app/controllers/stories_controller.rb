@@ -14,7 +14,7 @@ class StoriesController < ApplicationController
     @liked_stories = Set.new(current_user.story_likes.pluck(:story_id))
   end
 
-  # GET /stories/1
+  # GET /stories/:id
   #
   # @return [Hash<Symbol,ActiveRecord_Associations_CollectionProxy>]
   #  comments_hash: a Hash containing the comments whose parents are the comments
@@ -40,12 +40,11 @@ class StoriesController < ApplicationController
     @story = Story.new
   end
 
-  # GET /stories/1/edit
+  # GET /stories/:id/edit
   def edit
   end
 
   # POST /stories
-  # POST /stories.json
   def create
     @story = Story.new(story_params.merge({points: 0}))
 
@@ -59,7 +58,6 @@ class StoriesController < ApplicationController
   end
 
   # PATCH/PUT /stories/1
-  # PATCH/PUT /stories/1.json
   def update
     respond_to do |format|
       if @story.update(story_params)
@@ -71,7 +69,6 @@ class StoriesController < ApplicationController
   end
 
   # DELETE /stories/1
-  # DELETE /stories/1.json
   def destroy
     @story.destroy
     respond_to do |format|

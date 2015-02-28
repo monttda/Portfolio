@@ -15,7 +15,7 @@
             -offset_class = ''
           -else
             -offset_class = 'hoffset3'
-          %div.sub-text.text-left.near_like
+          %div.sub-text.text-left.near_like{class: "#{offset_class}"}
             = "#{@comment.points} #{t('general.points_by')} #{@comment.user.email}| #{time_ago_in_words(@comment.created_at)} #{t('general.ago')} "
             |
             = link_to t('general.show'), @comment
@@ -27,7 +27,7 @@
           %div.main-text.no-underline.hoffset3
             = @comment.text
           .voffset4.main-bar-content
-            .row-fluid.span1
+            .row-fluid.hoffset3
               =form_for @new_comment do |f|
                 =f.hidden_field :parent_id ,value: @comment.id
                 =f.hidden_field :user_id, value: current_user.id
