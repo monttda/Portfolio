@@ -1,6 +1,7 @@
 class Story < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :story_likes, dependent: :destroy
   validates :user, presence: true
   validates :title, presence: true
   validate :presence_of_url_or_text

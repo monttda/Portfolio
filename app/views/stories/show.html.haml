@@ -16,11 +16,11 @@
             -offset_class = ''
           -else
             -offset_class = 'hoffset3'
-            %div.main-text.no-underline.near_like{class: "#{offset_class}"}
-              -if @story.url.present?
-                = link_to @story.title, @story.url
-              -else
-                = @story.title
+          %div.main-text.no-underline.near_like{class: "#{offset_class}"}
+            -if @story.url.present?
+              = link_to @story.title, @story.url
+            -else
+              = link_to @story.title, story_path(@story)
           %div.sub-text.text-left.hoffset3
             = "#{@story.points} #{t('general.points_by')} #{@story.user.email}| #{time_ago_in_words(@story.created_at)} #{t('general.ago')}"
             |
