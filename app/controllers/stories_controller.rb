@@ -52,7 +52,7 @@ class StoriesController < ApplicationController
   # @return [Set<Integer>] @liked_comments: the liked comments but the current
   #          user
   def show
-    @comments = @story.comments
+    @comments = @story.comments.where(parent_id: nil)
     @comments_hash = @story.get_comments
     @comment = Comment.new
     if user_signed_in?
