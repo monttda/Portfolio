@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # @return [Story::ActiveRecord_Relation] @stories: the stories to be shown in
   #         ordered and paginated
-  # @return [Set<Integer>] @liked_stories: the liked stories but the current
+  # @return [Set<Integer>] @liked_stories: the liked stories by the current user
   #
   def index
     @stories = Story.order(created_at: :desc)
@@ -24,7 +24,7 @@ class StoriesController < ApplicationController
   # GET /user_stories
   # @return [Story::ActiveRecord_Relation] @stories: the stories to be shown in
   #         ordered and paginated
-  # @return [Set<Integer>] @liked_stories: the liked stories but the current
+  # @return [Set<Integer>] @liked_stories: the liked storiesby the current user
   #
   def user_stories
     @stories = Story.where(user: current_user).order(created_at: :desc)

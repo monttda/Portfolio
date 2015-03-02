@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # @return [Comment::ActiveRecord_Relation] @comments: the comments to be shown
   #          in ordered and paginated
-  # @return [Set<Integer>] @liked_comments: the liked comments but the current
+  # @return [Set<Integer>] @liked_comments: the liked comments by the current user
   #
   def index
     @comments = Comment.order(created_at: :desc)
@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
   # GET /user_comments
   # @return [Comment::ActiveRecord_Relation] @comments: the comments to be shown
   #          in ordered and paginated
-  # @return [Set<Integer>] @liked_comments: the liked comments but the current
+  # @return [Set<Integer>] @liked_comments: the liked comments by the current user
   #
   def user_comments
     @comments = Comment.where(user: current_user).order(created_at: :desc)
