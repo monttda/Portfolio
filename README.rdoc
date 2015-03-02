@@ -1,28 +1,13 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Small app that is inspired by https://news.ycombinator.com 
+it allows it's users to share opinions and links with other users and guests.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You can check it live in: https://portfolio-damd.herokuapp.com
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+It allows the users to sing in/ log in by providing and email or by 
+using their github account. Also if the user already has an account created directly with 
+his/her email and tries to log in with a github account whichs mails is the same it doesn't 
+create a new account but links the github account tho the one already existing that has the
+same email adress.
