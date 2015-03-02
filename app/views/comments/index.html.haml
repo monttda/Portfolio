@@ -13,10 +13,7 @@
                         id: "comment_#{comment.id}",
                         remote: true do
                 %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
-              -offset_class = ''
-            -else
-              -offset_class = 'hoffset3'
-            %div.main-text.no-underline.near_like{class: "#{offset_class}"}
+            %div.main-text.no-underline.near_like.hoffset3
               = comment.text
             %div.sub-text.text-left.hoffset3
               =render 'comments/comment_info', comment: comment

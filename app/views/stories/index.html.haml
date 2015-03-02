@@ -13,10 +13,7 @@
                         id: "story_#{story.id}",
                         remote: true do
                 %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
-              -offset_class = ''
-            -else
-              -offset_class = 'hoffset3'
-            %div.main-text.no-underline.near_like{class: "#{offset_class}"}
+            %div.main-text.no-underline.near_like.hoffset3
               -if story.url.present?
                 = link_to story.title, url_for(story.url)
               -else

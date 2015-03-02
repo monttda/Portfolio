@@ -5,17 +5,14 @@
       %tr
         %td.col-xs-12
           -unless !user_signed_in? || @liked
-            =button_to "/comment_likes/?comment_id=#{@comment.id}&user_id=#{@comment.user_id}",
+            =button_to "/comment_likes/?comment_id=#{@comment.id}",
                       method: :create,
                       class: ['button-as-no-button',],
                       form_class: ['inline-arrow'],
                       id: "comment_#{@comment.id}",
                       remote: true do
               %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
-            -offset_class = ''
-          -else
-            -offset_class = 'hoffset3'
-          %div.sub-text.text-left.near_like{class: "#{offset_class}"}
+          %div.sub-text.text-left.near_like.hoffset3
             =render 'comments/comment_info', comment: @comment
           %div.main-text.no-underline.hoffset3
             = @comment.text

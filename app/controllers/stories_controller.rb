@@ -56,8 +56,8 @@ class StoriesController < ApplicationController
     @comments_hash = @story.get_comments
     @comment = Comment.new
     if user_signed_in?
-      @liked = current_user.comment_likes
-                           .find_by(comment: @comment) ? true : false
+      @liked = current_user.story_likes
+                           .find_by(story: @story) ? true : false
       @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
     else
       @liked = false
