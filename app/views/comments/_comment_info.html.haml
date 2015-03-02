@@ -3,8 +3,8 @@
 = link_to t('general.show'), comment
 -if comment.story_id.present?
   |
-  =link_to t('general.story'), story_path(comment.story_id)
--elsif comment.parent_id.present?
+  =link_to "#{t('general.on_story')} #{comment.story.title.truncate(20)}", story_path(comment.story_id)
+-if comment.parent_id.present?
   |
   =link_to t('general.parent'), comment_path(comment.parent_id)
 -if user_signed_in? && current_user.id == comment.user_id

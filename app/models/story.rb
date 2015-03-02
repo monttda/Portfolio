@@ -14,7 +14,7 @@ class Story < ActiveRecord::Base
 =end
 
     def get_comments
-      comments = self.comments.order(:created_at).to_a
+      comments = self.comments.where(parent_id: nil).order(:created_at).to_a
       comments_hash = {}
       while comments.any? do
         comment = comments.shift

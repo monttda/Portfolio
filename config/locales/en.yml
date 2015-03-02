@@ -38,7 +38,8 @@ en:
     news: 'News'
     my_comments: 'My comments'
     my_stories: 'My stories'
-    or: "or"
+    on_story: 'on:'
+    or: 'or'
     parent: 'Parent'
     points_by: 'points by'
     portfolio: 'Portfolio'

@@ -6,6 +6,7 @@ class Comment < ActiveRecord::Base
   has_many :comments, foreign_key: "parent_id", dependent: :destroy
   validates :user, presence: true
   validates :text, presence: true
+  validates :story, presence: true
 
 
 =begin
@@ -16,7 +17,7 @@ class Comment < ActiveRecord::Base
 =end
 
     def get_comments
-      comments = self.comments.order(:created_at).to_a
+      comments = self.comments.where(parent_id: nil).order(:created_at).to_a
       comments_hash = {}
       while comments.any? do
         comment = comments.shift
