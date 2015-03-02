@@ -22,14 +22,7 @@
               -else
                 = link_to story.title, story_path(story)
             %div.sub-text.text-left.hoffset3
-              = "#{story.points} #{t('general.points_by')} #{story.user.email} | #{time_ago_in_words(story.created_at)} #{t('general.ago')}"
-              |
-              = link_to t('general.show'), story
-              -if user_signed_in? && current_user.id == story.user_id
-                |
-                = link_to t('general.edit'), edit_story_path(story)
-                |
-                = link_to t('general.destroy'), story, :method => :delete, :data => { :confirm => t('general.confirm') }
+              =render 'stories/story_info', story: story
 
       %tr
         %td

@@ -1,0 +1,14 @@
+= "#{comment.points} #{t('general.points_by')} #{comment.user.email}| #{time_ago_in_words(comment.created_at)} #{t('general.ago')} "
+|
+= link_to t('general.show'), comment
+-if comment.story_id.present?
+  |
+  =link_to t('general.story'), story_path(comment.story_id)
+-elsif comment.parent_id.present?
+  |
+  =link_to t('general.parent'), comment_path(comment.parent_id)
+-if user_signed_in? && current_user.id == comment.user_id
+  |
+  = link_to t('general.edit'), edit_comment_path(comment)
+  |
+  = link_to t('general.destroy'), comment, :method => :delete, :data => { :confirm => t('general.confirm') }
