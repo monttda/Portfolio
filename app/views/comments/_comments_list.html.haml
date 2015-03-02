@@ -3,23 +3,24 @@
 
   @param [Array<Comment>] comments: the comments to be shown in the view and
                           their children
--comments.each do |comment|
-  -unless !user_signed_in? || @liked_comments.include?(comment.id)
-    =button_to "/comment_likes/?comment_id=#{comment.id}",
-              method: :create,
-              class: ['button-as-no-button',],
-              form_class: ['inline-arrow'],
-              id: "comment_#{comment.id}",
-              remote: true do
-      %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
-    -offset_class = ''
-  -else
-    -offset_class = 'hoffset3'
-  %div.sub-text.text-left.near_like{class: "#{offset_class}"}
-    =render 'comments/comment_info' ,comment: comment
-  %div.main-text.no-underline.voffset.hoffset3
-    = comment.text
+.nhoffset3
+  -comments.each do |comment|
+    -unless !user_signed_in? || @liked_comments.include?(comment.id)
+      =button_to "/comment_likes/?comment_id=#{comment.id}",
+                method: :create,
+                class: ['button-as-no-button',],
+                form_class: ['inline-arrow'],
+                id: "comment_#{comment.id}",
+                remote: true do
+        %div.glyphicon.glyphicon-triangle-top.inline-arrow.button-as-no-button
+      -offset_class = ''
+    -else
+      -offset_class = 'hoffset3'
+    %div.sub-text.text-left.near_like{class: "#{offset_class}"}
+      =render 'comments/comment_info' ,comment: comment
+    %div.main-text.no-underline.voffset.hoffset3
+      = comment.text
 
-  -if @comments_hash["#{comment.id}"].present?
-    .row-fluid.hoffset4
-      =render 'comments/comments_list', comments: @comments_hash["#{comment.id}"]
+    -if @comments_hash["#{comment.id}"].present?
+      .row-fluid.hoffset4
+        =render 'comments/comments_list', comments: @comments_hash["#{comment.id}"]

@@ -34,4 +34,9 @@
                 =f.text_area :text, size: "49x4"
                 .voffset2
                   =f.submit t('comment.add')
-            =render 'comments/comments_list', comments: @comments
+            %table
+              %thead
+              %tbody
+                %tr
+                  %td
+                    =render 'comments/comments_list', comments: @comments
