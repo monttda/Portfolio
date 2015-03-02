@@ -19,6 +19,26 @@ class StoriesController < ApplicationController
     end
   end
 
+
+
+  # GET /user_stories
+  # @return [Story::ActiveRecord_Relation] @stories: the stories to be shown in
+  #         ordered and paginated
+  # @return [Set<Integer>] @liked_stories: the liked stories but the current
+  #
+  def user_stories
+    @stories = Story.where(user: current_user).order(created_at: :desc)
+    page = params[:page] ? params[:page].to_i : 1
+    @stories = @stories.paginate(page: page,
+                                 per_page: @@per_page)
+    if user_signed_in?
+      @liked_stories = Set.new(current_user.story_likes.pluck(:story_id))
+    else
+      @liked_stories = Set.new
+    end
+
+    render :index
+  end
   # GET /stories/:id
   #
   # @return [Hash<Symbol,ActiveRecord_Associations_CollectionProxy>]

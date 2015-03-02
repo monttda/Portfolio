@@ -36,6 +36,8 @@ en:
     login: 'Login'
     logout: 'Logout'
     news: 'News'
+    my_comments: 'My comments'
+    my_stories: 'My stories'
     or: "or"
     parent: 'Parent'
     points_by: 'points by'

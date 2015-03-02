@@ -19,6 +19,24 @@ class CommentsController < ApplicationController
     end
   end
 
+  # GET /user_comments
+  # @return [Comment::ActiveRecord_Relation] @comments: the comments to be shown
+  #          in ordered and paginated
+  # @return [Set<Integer>] @liked_comments: the liked comments but the current
+  #
+  def user_comments
+    @comments = Comment.where(user: current_user).order(created_at: :desc)
+    page = params[:page] ? params[:page].to_i : 1
+    @comments = @comments.paginate(page: page,
+                                 per_page: @@per_page)
+    if user_signed_in?
+      @liked_comments = Set.new(current_user.comment_likes.pluck(:comment_id))
+    else
+      @liked_comments = Set.new
+    end
+    render :index
+  end
+
   # GET /comments/:id
   #
   # @return [Hash<Symbol,ActiveRecord_Associations_CollectionProxy>]
