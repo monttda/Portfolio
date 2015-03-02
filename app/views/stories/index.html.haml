@@ -6,7 +6,7 @@
         %tr
           %td
             -unless !user_signed_in? || @liked_stories.include?(story.id)
-              =button_to "/story_likes/?story_id=#{story.id}&user_id=#{story.user_id}",
+              =button_to "/story_likes/?story_id=#{story.id}",
                         method: :create,
                         class: ['button-as-no-button'],
                         form_class: ['inline-arrow'],

@@ -6,7 +6,7 @@
         %tr
           %td
             -unless !user_signed_in? || @liked_comments.include?(comment.id)
-              =button_to "/comment_likes/?comment_id=#{comment.id}&user_id=#{comment.user_id}",
+              =button_to "/comment_likes/?comment_id=#{comment.id}",
                         method: :create,
                         class: ['button-as-no-button',],
                         form_class: ['inline-arrow'],

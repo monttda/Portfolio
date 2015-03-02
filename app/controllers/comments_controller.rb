@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :create]
-  @@per_page = 5
+  @@per_page = 10
   # GET /comments
   # @return [Comment::ActiveRecord_Relation] @comments: the comments to be shown
   #          in ordered and paginated
@@ -46,6 +46,7 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/:id/edit
+  # @return [Comment] @comment: the Comment to be edited
   def edit
   end
 
@@ -55,7 +56,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params.merge({points: 0}))
     if @comment.save
-      flash[:notice] = 'Comment was successfully created.'
+      flash[:notice] = t('comment.notices.create')
     else
       flash[:alert] = ""
       @comment.errors.full_messages.each do |message|
@@ -67,23 +68,24 @@ class CommentsController < ApplicationController
     redirect_to :back
   end
 
-  # PATCH/PUT /comments/1
+  # PATCH/PUT /comments/:id
+  # @return [Comment] @comment: the Comment to be updated
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @comment.update(comment_params)
+      flash[:notice] = t('comment.notices.update')
+      redirect_to comments_path(@comment)
+    else
+      render :edit
     end
   end
 
-  # DELETE /comments/1
+  # DELETE /comments/:id
+  #
+  # @return [Comment] @comment: the Comment to be deestroyed
   def destroy
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-    end
+    flash[:notice] = t('comment.notices.destroy')
+    redirect_to comments_path
   end
 
   private

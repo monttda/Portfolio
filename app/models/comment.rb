@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   belongs_to :story
   belongs_to :parent, class_name: "Comment"
   has_many :comment_likes, dependent: :destroy
-  has_many :comments, foreign_key: "parent_id"
+  has_many :comments, foreign_key: "parent_id", dependent: :destroy
   validates :user, presence: true
   validates :text, presence: true
 

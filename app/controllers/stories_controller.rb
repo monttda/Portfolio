@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :create, :new]
-  @@per_page = 5
+  @@per_page = 10
   # GET /stories
   # @return [Story::ActiveRecord_Relation] @stories: the stories to be shown in
   #         ordered and paginated
@@ -51,39 +51,37 @@ class StoriesController < ApplicationController
   end
 
   # GET /stories/:id/edit
+  # @return [Story] @story: the Story to be edited
   def edit
   end
 
   # POST /stories
+  # @return [Story] @story: the Story to be created
   def create
     @story = Story.new(story_params.merge({points: 0}))
-
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @story.save
+      flash[:notice] = t('story.notices.create')
+      redirect_to @story
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /stories/1
+  # PATCH/PUT /stories/:id
   def update
-    respond_to do |format|
-      if @story.update(story_params)
-        format.html { redirect_to @story, notice: 'Story was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @story.update(story_params)
+      flash[:notice] = t('story.notices.update')
+      redirect_to story_path(@story)
+    else
+      render :edit
     end
+
   end
 
-  # DELETE /stories/1
+  # DELETE /stories/:id
   def destroy
     @story.destroy
-    respond_to do |format|
-      format.html { redirect_to stories_url, notice: 'Story was successfully destroyed.' }
-    end
+    redirect_to stories_url, notice: t('story.notices.destroy')
   end
 
   private

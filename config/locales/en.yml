@@ -23,6 +23,10 @@ en:
   comment:
     add: 'Add comment'
     update: 'Update comment'
+    notices:
+      create: 'Comment was successfully created.'
+      destroy: 'Comment was successfully created.'
+      update: 'Comment was successfully updated.'
   general:
     ago: 'ago'
     confirm: 'Are you sure?'
@@ -42,6 +46,10 @@ en:
     errors:
       url_text: 'The story should have url or text but not both'
       wrong_url_format: 'The url given is not correct it should begin with https:// or http://'
+    notices:
+      create: 'Story was successfully created.'
+      destroy: 'Story was successfully created.'
+      update: 'Story was successfully updated.'
     text: 'Text'
     title: 'Title'
     url: 'URL'

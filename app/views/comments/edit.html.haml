@@ -4,6 +4,11 @@
     %tr
       %td.col-xs-12.hoffset5
         =form_for @comment do |f|
+          - if @comment.errors.any?
+            #error_explanation
+              %ul
+                - @comment.errors.full_messages.each do |msg|
+                  %li= msg
           .voffset4
           =f.text_area :text, size: "49x4"
           .voffset2
