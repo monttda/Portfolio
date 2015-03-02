@@ -6,7 +6,7 @@ FactoryGirl.define do
     points {rand(1000).to_i}
     created_at Time.now
     updated_at Time.now
-
+    story
     trait :with_comments do
       ignore do
         comments_count 2
