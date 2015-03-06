@@ -1,7 +1,8 @@
 == README
 
 Small app that is inspired by https://news.ycombinator.com 
-it allows it's users to share opinions and links with other users and guests.
+it allows it's users to share opinions and links with other users and guests and the  sole purpose of this app was to learn how to use
+OmniAuth to allow users login/sing in  with accounts Such as Github
 
 You can check it live in: https://portfolio-damd.herokuapp.com
 
