@@ -1,7 +1,8 @@
 == README
 NOTE = the sole purpose of this app was to learn how to use
 OmniAuth to allow users login/sing in  with accounts Such as Github. There are some bad code practices 
-in here that happened only because the priority was just to have something with what the OmniAuth could be tested
+in here that happened only because the priority was just to have something with what the OmniAuth could be seen working and not 
+just a white background with login fields.
 
 Small app that is inspired by https://news.ycombinator.com 
 it allows it's users to share opinions and links with other users and guests.
